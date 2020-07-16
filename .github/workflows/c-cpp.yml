@@ -13,6 +13,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        clean: true
+        fetch-depth: 0
+
+    - name: Update
+      run: |
+        sudo apt-get update
+        sudo apt-get install subversion ragel curl texinfo g++ bison flex cvs yasm automake libtool autoconf gcc cmake git make pkg-config zlib1g-dev mercurial unzip pax nasm gperf autogen bzip2 autoconf-archive p7zip-full meson clang python3-distutils -y
+        
     - name: build
       run: ./cross_compile_ffmpeg.sh --build-ffmpeg-static=n --build-ffmpeg-shared=y --gcc-cpu-count=12 --compiler-flavors=win64 --enable-gpl=n
    
